@@ -38,25 +38,25 @@ agent-os-standards/
 ### Making Changes
 
 1. **Edit standards in this repository**
-   ```bash
+   ```powershell
    cd C:\Users\CalvinCraig\source\repos\agent-os-standards
    # Edit the relevant .md files
    ```
 
 2. **Commit your changes**
-   ```bash
+   ```powershell
    git add .
    git commit -m "Description of changes"
    ```
 
 3. **Push to GitHub**
-   ```bash
+   ```powershell
    git push origin main
    ```
 
 4. **Sync to Agent OS installation**
-   ```bash
-   cp -r backend frontend global testing "C:\Users\CalvinCraig\source\repos\agent-os\profiles\default\standards\"
+   ```powershell
+   Copy-Item -Path backend,frontend,global,testing -Destination "C:\Users\CalvinCraig\source\repos\agent-os\profiles\default\standards\" -Recurse -Force
    ```
 
 ### Important Notes
