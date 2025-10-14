@@ -23,12 +23,16 @@ Each `.md` file contains specific guidelines that AI agents will follow when gen
 
 1. **Edit standards here** (in this repo)
 2. **Commit and push** to GitHub
-3. **Sync to Agent OS**:
+3. **Sync to Agent OS** using the `/sync` slash command, or manually:
    ```powershell
    Copy-Item -Path backend,frontend,global,testing -Destination "C:\Users\CalvinCraig\source\repos\agent-os\profiles\default\standards\" -Recurse -Force
    ```
 
 **Never edit files directly** in `C:\Users\CalvinCraig\source\repos\agent-os\profiles\default\standards\` - they will be overwritten.
+
+## Custom Slash Commands
+
+- `/sync` - Sync standards from this repository to the Agent OS installation directory
 
 ## Making Changes to Standards
 

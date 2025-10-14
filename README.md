@@ -55,6 +55,13 @@ agent-os-standards/
    ```
 
 4. **Sync to Agent OS installation**
+
+   Using Claude Code slash command:
+   ```
+   /sync
+   ```
+
+   Or manually with PowerShell:
    ```powershell
    Copy-Item -Path backend,frontend,global,testing -Destination "C:\Users\CalvinCraig\source\repos\agent-os\profiles\default\standards\" -Recurse -Force
    ```
