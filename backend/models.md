@@ -51,3 +51,22 @@
 - **Logical schemas**: Use schemas to organize related tables (e.g., `Sales`, `HR`, `Inventory`)
 - **Default schema**: Use `dbo` schema when no specific schema is needed
 - **Schema permissions**: Consider security implications when designing schema structure
+
+### SSDT Project-Specific Guidelines
+
+#### Temporal Tables
+- **System-Versioning**: Use SQL Server temporal tables for tables requiring audit history
+- **Column Requirements**: Include `ValidFrom DATETIME2 GENERATED ALWAYS AS ROW START` and `ValidTo DATETIME2 GENERATED ALWAYS AS ROW END`
+- **Period Definition**: Add `PERIOD FOR SYSTEM_TIME (ValidFrom, ValidTo)`
+- **History Table**: Specify history table with `SYSTEM_VERSIONING = ON (HISTORY_TABLE = [schema].[TableName_History])`
+
+#### Table-Valued Types
+- **Bulk Operations**: Define table-valued types for bulk insert/update operations
+- **Type Naming**: Use `*TableType` suffix (e.g., `AccountTransactionsTableType`)
+- **Column Matching**: Type structure should match target table structure for relevant columns
+- **Performance**: Prefer table-valued parameters over XML or JSON for bulk operations
+
+#### Transaction Patterns
+- **Deduplication**: Use EXCEPT operator for deduplication in bulk insert procedures
+- **Error Handling**: Include TRY/CATCH blocks in stored procedures with appropriate error handling
+- **Transaction Scope**: Explicitly define transaction boundaries in stored procedures

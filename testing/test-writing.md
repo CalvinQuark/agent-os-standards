@@ -7,3 +7,12 @@
 - **Clear Test Names**: Use descriptive names that explain what's being tested and the expected outcome
 - **Mock External Dependencies**: Isolate units by mocking databases, APIs, file systems, and other external services
 - **Fast Execution**: Keep unit tests fast (milliseconds) so developers run them frequently during development
+
+### Database Testing with tSQLt
+- **Test Database Separation**: All unit tests run in separate `*Tests` database (e.g., `NorthwindTests`)
+- **Test Independence**: Each tSQLt test must clean up after itself or use FakeTable for isolation
+- **Focus on Business Logic**: Test stored procedures and functions that contain business logic
+- **Minimal Test Data**: Use smallest possible dataset that proves the test case
+- **Realistic Scenarios**: Test data should reflect realistic production scenarios even if minimal
+- **Fast Execution**: Database tests should complete in seconds, not minutes
+- **Mock External Calls**: Use tSQLt.SpyProcedure for procedures that call other procedures or external systems

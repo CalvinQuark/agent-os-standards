@@ -13,9 +13,13 @@ Define your technical stack below. This serves as a reference for all team membe
 - **UI Components:** [e.g., shadcn/ui, Material UI, custom library]
 
 ### Database & Storage
-- **Database:** SQL Server
-- **ORM/Query Builder:** Entity Framework Core, ADO.NET, Dapper
-- **Caching:** [e.g., Redis, MemoryCache]
+- **Database:** SQL Server (localhost deployment)
+- **Database Projects:** SDK-style SSDT projects in Visual Studio Code
+- **Database Extensions:** SQL Database Projects, SQL Server (mssql)
+- **Query Tools:** ADO.NET for data access, optional Dapper for simple queries
+- **Unit Testing:** tSQLt framework in `[DatabaseName]Tests` databases
+- **ORM:** Entity Framework Core (when applicable)
+- **Caching:** [e.g., Redis, MemoryCache, SQL Server in-memory tables]
 
 ### Testing & Quality
 - **Test Framework:** xUnit, NUnit, or MSTest
