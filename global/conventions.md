@@ -9,3 +9,15 @@
 - **Testing Requirements**: Define what level of testing is required before merging (unit tests, integration tests, etc.)
 - **Feature Flags**: Use feature flags for incomplete features rather than long-lived feature branches
 - **Changelog Maintenance**: Keep a changelog or release notes to track significant changes and improvements
+
+### C# Project Conventions
+
+- **Namespace organization**: Use namespace structure that mirrors folder structure for consistency
+- **File naming**: Name files to match the primary class/interface they contain (e.g., `CustomerOrderProcessor.cs`)
+- **One class per file**: Generally maintain one public class or interface per file for better organization and discoverability
+- **Project structure**: Organize code into logical folders (e.g., Models, Services, Controllers, Utilities)
+- **EditorConfig usage**: Use `.editorconfig` files to enforce consistent formatting across team members and IDEs
+- **Async naming**: Suffix asynchronous methods with `Async` (e.g., `ProcessOrderAsync`, `GetCustomerDataAsync`)
+- **Interface naming**: Prefix interface names with `I` (e.g., `IOrderProcessor`, `ICustomerRepository`)
+- **Configuration files**: Use `appsettings.json` for configuration with environment-specific overrides (e.g., `appsettings.Development.json`)
+- **Dependency injection**: Prefer constructor injection for dependencies and register services in `Program.cs` or startup configuration

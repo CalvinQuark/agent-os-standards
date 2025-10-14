@@ -3,9 +3,9 @@
 Define your technical stack below. This serves as a reference for all team members and helps maintain consistency across the project.
 
 ### Framework & Runtime
-- **Application Framework:** [e.g., Rails, Django, Next.js, Express]
-- **Language/Runtime:** [e.g., Ruby, Python, Node.js, Java]
-- **Package Manager:** [e.g., bundler, pip, npm, yarn]
+- **Language/Runtime:** C# / .NET
+- **Target Framework:** .NET 8.0 or later
+- **Package Manager:** NuGet
 
 ### Frontend
 - **JavaScript Framework:** [e.g., React, Vue, Svelte, Alpine, vanilla JS]
@@ -13,19 +13,20 @@ Define your technical stack below. This serves as a reference for all team membe
 - **UI Components:** [e.g., shadcn/ui, Material UI, custom library]
 
 ### Database & Storage
-- **Database:** [e.g., PostgreSQL, MySQL, MongoDB]
-- **ORM/Query Builder:** [e.g., ActiveRecord, Prisma, Sequelize]
-- **Caching:** [e.g., Redis, Memcached]
+- **Database:** SQL Server
+- **ORM/Query Builder:** Entity Framework Core, ADO.NET, Dapper
+- **Caching:** [e.g., Redis, MemoryCache]
 
 ### Testing & Quality
-- **Test Framework:** [e.g., Jest, RSpec, pytest]
-- **Linting/Formatting:** [e.g., ESLint, Prettier, RuboCop]
+- **Test Framework:** xUnit, NUnit, or MSTest
+- **Linting/Formatting:** EditorConfig, .NET analyzers
+- **Code Analysis:** Roslyn analyzers
 
 ### Deployment & Infrastructure
-- **Hosting:** [e.g., Heroku, AWS, Vercel, Railway]
-- **CI/CD:** [e.g., GitHub Actions, CircleCI]
+- **Hosting:** [e.g., Azure, AWS, on-premises]
+- **CI/CD:** [e.g., GitHub Actions, Azure DevOps, Jenkins]
 
 ### Third-Party Services
-- **Authentication:** [e.g., Auth0, Devise, NextAuth]
-- **Email:** [e.g., SendGrid, Postmark]
-- **Monitoring:** [e.g., Sentry, Datadog]
+- **Authentication:** [e.g., ASP.NET Core Identity, Azure AD, Auth0]
+- **Email:** [e.g., SendGrid, Azure Communication Services]
+- **Monitoring:** [e.g., Application Insights, Sentry, Datadog]
