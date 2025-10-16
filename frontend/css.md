@@ -9,4 +9,6 @@
 - **Class and Style Parameters**: Use component `Class` and `Style` parameters to apply custom styling when needed (e.g., `<FluentButton Class="custom-button" />`)
 - **Global Styles**: Place global styles in `app.css` or `site.css` and use them sparingly; prefer component-level styling
 - **CSS Custom Properties**: Define application-specific CSS custom properties for values not covered by Fluent UI tokens
+- **Large Screen Media Queries**: Use custom media queries for displays beyond Fluent UI's 1024px breakpoint (e.g., `@media (min-width: 1920px)` for FHD+, `@media (min-width: 2560px)` for 4K) to optimize layout and content density on large displays
+- **Touchscreen Detection**: Use `@media (hover: none)` and `@media (pointer: coarse)` to detect touch-primary devices and adapt interaction patterns accordingly
 - **Performance**: Fluent UI Blazor handles CSS optimization automatically; avoid loading unnecessary custom stylesheets
