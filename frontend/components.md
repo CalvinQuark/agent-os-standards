@@ -6,7 +6,8 @@
 - **Clear Interface**: Define explicit, well-documented `[Parameter]` properties with sensible defaults and XML documentation comments
 - **Encapsulation**: Keep internal implementation details private; expose only necessary `[Parameter]` properties and public methods
 - **Consistent Naming**: Use PascalCase for component files and parameters (e.g., `CustomerGrid.razor`, `[Parameter] public string Title { get; set; }`); follow Blazor conventions
-- **Component Structure**: Organize components as `.razor` files with optional code-behind (`.razor.cs`) for complex logic to keep markup clean
+- **Component Structure**: Organize components as `.razor` files with code-behind (`.razor.cs`) files for C# logic; keep markup files focused on presentation
+- **Code-Behind Files**: Place all but the simplest C# logic in `[page|component].razor.cs` backing files; `.razor` files should contain only `@code` blocks with `[Parameter]` properties, minimal inline event handlers (e.g., `@onclick="() => IsOpen = !IsOpen"`), and simple rendering logic (e.g., `@foreach (var item in Enum.GetValues<MyEnum>())`); methods, complex logic, lifecycle overrides, and field initialization belong in `.razor.cs` files
 - **State Management**: Keep state as local as possible using component fields; use cascading values or state containers only when needed by multiple components
 - **Minimal Parameters**: Keep the number of `[Parameter]` properties manageable; if a component needs many parameters, consider composition or splitting it
 - **Fluent UI Components**: Prefer Fluent UI Blazor components (FluentButton, FluentDataGrid, FluentTextField, etc.) over custom HTML elements for consistency
