@@ -20,6 +20,7 @@
 - **Data type alignment**: Align data types vertically for readability in CREATE TABLE statements
 - **Text columns**: All text columns must be declared as NVARCHAR unless explicitly instructed otherwise for a particular field
 - **Flag/bit column naming**: Prefix boolean/bit columns with `Is` where feasible (e.g., `IsEmployeeAccount`, `IsActive`, `IsPersonal`, `IsDeleted`)
+- **Flag/bit nullability**: All bit/flag columns should be non-nullable (use `NOT NULL` with `DEFAULT 0` or `DEFAULT 1`). If nullability is semantically required, use two separate flags to represent the three states
 - **Constraint placement**: Place constraints on the same line as the column definition for better organization
 - **Null handling**: Explicitly specify NOT NULL or NULL for each column to make nullability clear
 - **Default values**: Use DEFAULT constraint for columns that should have default values (e.g., `OrderDate DATETIME DEFAULT GETDATE()`)

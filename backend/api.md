@@ -1,7 +1,7 @@
 ## API endpoint standards and conventions
 
 - **RESTful Design**: Follow REST principles with clear resource-based URLs and appropriate HTTP methods (GET, POST, PUT, PATCH, DELETE)
-- **Consistent Naming**: Use consistent, PascalCase naming conventions for endpoints across the API (i.e., consistent with C# conventions)
+- **Consistent Naming**: Use consistent, PascalCase naming conventions for endpoints and query parameters throughout the API (i.e., consistent with C# conventions)
 - **Versioning**: Implement API versioning strategy (URL path or headers) to manage breaking changes without disrupting existing clients
 - **Plural Nouns**: Use plural nouns for resource endpoints (e.g., `/Users`, `/Products`) for consistency
 - **Nested Resources**: Limit nesting depth to 2-3 levels maximum to keep URLs readable and maintainable
