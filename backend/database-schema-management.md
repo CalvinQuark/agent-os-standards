@@ -5,6 +5,10 @@
 - **Build Output**: Build produces DACPAC (Data-tier Application Package) file
 - **Deployment Safety**: Review deployment script before applying to production
 - **Backup First**: Always backup production database before schema deployment
+    - All production databases contain these three SPROCs for performing backups:
+        - `EXEC Utility.p_Backup[DatabaseName]DatabaseToCloudFullBackup`
+        - `EXEC Utility.p_Backup[DatabaseName]DatabaseToCloudDifferentialBackup`
+        - `EXEC Utility.p_Backup[DatabaseName]DatabaseToCloudTransactionLogBackup`
 
 ### Schema Change Workflow
 - **Modify Objects**: Edit SQL files in SSDT project to reflect desired schema
