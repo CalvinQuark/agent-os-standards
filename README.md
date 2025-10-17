@@ -63,13 +63,13 @@ agent-os-standards/
 
    Or manually with PowerShell:
    ```powershell
-   Copy-Item -Path backend,frontend,global,testing -Destination "C:\Users\CalvinCraig\source\repos\agent-os\profiles\default\standards\" -Recurse -Force
+   Copy-Item -Path backend,frontend,global,testing -Destination "C:\Users\CalvinCraig\agent-os\profiles\default\standards\" -Recurse -Force
    ```
 
 ### Important Notes
 
 - **Source of Truth**: This repository is the authoritative source for your custom standards
-- **Do NOT edit directly**: Never modify files in `C:\Users\CalvinCraig\source\repos\agent-os\profiles\default\standards\` directly
+- **Do NOT edit directly**: Never modify files in `C:\Users\CalvinCraig\agent-os\profiles\default\standards\` directly
 - **Always sync**: After committing changes here, copy them back to the Agent OS installation directory
 - **Backup**: GitHub serves as a backup and history of all standard modifications
 
@@ -77,7 +77,7 @@ agent-os-standards/
 
 This repository was created from the default Agent OS standards located at:
 ```
-C:\Users\CalvinCraig\source\repos\agent-os\profiles\default\standards
+C:\Users\CalvinCraig\agent-os\profiles\default\standards
 ```
 
 The baseline configuration represents the Agent OS defaults, which can now be customized to match personal preferences and project requirements.
