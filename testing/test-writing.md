@@ -8,6 +8,19 @@
 - **Mock External Dependencies**: Isolate units by mocking databases, APIs, file systems, and other external services
 - **Fast Execution**: Keep unit tests fast (milliseconds) so developers run them frequently during development
 
+### End-to-End Testing with Playwright for .NET
+
+- **Write Tests in C#**: Use Playwright for .NET and write all tests in C# rather than TypeScript
+- **Cross-Browser Testing**: Test across Chromium, Firefox, and WebKit to ensure cross-browser compatibility
+- **Page Object Model**: Organize E2E tests using Page Object Model pattern for maintainability
+- **Async/Await Pattern**: Use async/await for all Playwright operations (e.g., `await page.GotoAsync()`, `await page.ClickAsync()`)
+- **Wait for Elements**: Use Playwright's built-in waiting mechanisms (e.g., `WaitForSelectorAsync`) instead of manual delays
+- **Explicit Locators**: Use explicit, stable locators (data-testid attributes, semantic selectors) rather than brittle CSS selectors
+- **Test Isolation**: Each E2E test should be independent and not rely on state from previous tests
+- **Setup and Teardown**: Use test fixtures for browser setup/teardown to avoid resource leaks
+- **Screenshot on Failure**: Capture screenshots automatically on test failures for debugging
+- **Headless Mode**: Run tests in headless mode in CI/CD pipelines for faster execution
+
 ### Database Testing with tSQLt
 - **Test Database Separation**: All unit tests run in separate `*Tests` database (e.g., `NorthwindTests`)
 - **Test Independence**: Each tSQLt test must clean up after itself or use FakeTable for isolation

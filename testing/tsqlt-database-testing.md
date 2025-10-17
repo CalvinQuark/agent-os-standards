@@ -27,7 +27,7 @@
 - **Opening Braces**: Place opening braces on same line with preceding space
 - **Line Length**: Maximum 300 characters before wrapping
 - **Short Statements**: Collapse statements shorter than 75 characters to single line
-
+**Authentication:**
 ### Test Naming Conventions
 - **Pattern**: `Test that [description with backtick-delimited artifacts]`
 - **Examples**:
@@ -130,4 +130,4 @@ EXEC tSQLt.ApplyConstraint 'dbo.Orders', 'CHK_Orders_TotalAmount_Positive';
 - **Single Assertion**: Each test should verify one specific behavior
 - **Descriptive Variables**: Use descriptive variable names that clearly indicate their purpose
 - **Consistent Formatting**: Follow the same T-SQL formatting standards used in production code
-- **Readable Test Names**: Use natural language with spaces and backtick-delimited artifacts for maximum readability
+- **Readable Test Names**: Use natural language with spaces and backtick-delimited artifact names for maximum readability
