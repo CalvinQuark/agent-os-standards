@@ -29,3 +29,13 @@
 - **Realistic Scenarios**: Test data should reflect realistic production scenarios even if minimal
 - **Fast Execution**: Database tests should complete in seconds, not minutes
 - **Mock External Calls**: Use tSQLt.SpyProcedure for procedures that call other procedures or external systems
+
+### .NET Aspire Testing
+
+- **Integration testing**: Use Aspire's test project template to create integration tests that spin up the full AppHost with all dependencies
+- **TestContainers support**: Leverage Aspire's built-in support for TestContainers to run real database and cache instances during tests
+- **Service substitution**: Use `IDistributedApplicationTestingBuilder` to substitute or mock specific services in the AppHost for testing
+- **Dashboard in tests**: Access Aspire dashboard during test runs to observe telemetry and debug failing integration tests
+- **Health check validation**: Test that health checks report correct status for all dependencies before running main test logic
+- **Resource initialization**: Wait for all Aspire resources (containers, projects) to be ready before executing test assertions
+- **Test isolation**: Each test should start with a clean AppHost instance to prevent state leakage between tests

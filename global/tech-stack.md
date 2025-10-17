@@ -6,6 +6,7 @@ Define your technical stack below. This serves as a reference for all team membe
 - **Language/Runtime:** C# / .NET
 - **Target Framework:** .NET 9.0 or later
 - **Package Manager:** NuGet
+- **Application Host:** .NET Aspire (for orchestration, service discovery, and observability)
 
 ### Frontend
 - **Framework:** Blazor (Server and WebAssembly)

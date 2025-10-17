@@ -22,3 +22,15 @@
 - **Configuration files**: Use `appsettings.json` for configuration with environment-specific overrides (e.g., `appsettings.Development.json`)
 - **Secret management**: Store local development secrets in User Secrets cache using `dotnet user-secrets` CLI or Visual Studio. Never use environment variables for sensitive data in .NET projects. Access secrets through `IConfiguration` like other config values
 - **Dependency injection**: Prefer constructor injection for dependencies and register services in `Program.cs` or startup configuration
+
+### .NET Aspire Project Conventions
+
+- **AppHost project**: Create a dedicated `*.AppHost` project for orchestration using `dotnet new aspire-apphost`
+- **ServiceDefaults project**: Create a shared `*.ServiceDefaults` project containing common configuration (OpenTelemetry, health checks, service discovery)
+- **Resource registration**: Register all projects, containers, and external services in the AppHost's `Program.cs` using the fluent API (e.g., `builder.AddProject<Projects.ApiService>()`)
+- **Service discovery**: Use Aspire's built-in service discovery instead of hardcoding URLs; reference services by their registered names
+- **Dashboard access**: Run AppHost project to launch the Aspire dashboard for monitoring telemetry, logs, traces, and metrics
+- **Container resources**: Add external dependencies (Redis, PostgreSQL, SQL Server, etc.) using Aspire hosting packages (e.g., `Aspire.Hosting.Redis`)
+- **Connection strings**: Use Aspire's configuration system to manage connection strings rather than `appsettings.json`
+- **Health checks**: Leverage ServiceDefaults to automatically configure health checks for all services
+- **Telemetry**: Rely on ServiceDefaults to wire up OpenTelemetry for distributed tracing, metrics, and logging across all services
