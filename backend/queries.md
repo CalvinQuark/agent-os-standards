@@ -8,6 +8,19 @@
 - **Set Query Timeouts**: Implement timeouts to prevent runaway queries from impacting system performance
 - **Cache Expensive Queries**: Cache results of complex or frequently-run queries when appropriate
 
+### Entity Framework Core with Stored Procedures
+
+- **Stored Procedure Access**: Use EF Core to interact with the database via Stored Procedures rather than accessing tables or views directly
+- **Database-First Approach**: Follow Database-First development using SSDT (SDK-style) projects; define schema in SQL Server projects first
+- **Procedure Mapping**: Use `FromSqlRaw` or `FromSqlInterpolated` with stored procedures for queries (e.g., `context.Customers.FromSqlRaw("EXEC dbo.GetCustomers")`)
+- **Output Parameters**: Use `SqlParameter` with `Direction = ParameterDirection.Output` for stored procedures that return output parameters
+- **Multiple Result Sets**: Use `DbDataReader` when stored procedures return multiple result sets
+- **Parameterization**: Always pass parameters to stored procedures using `SqlParameter` objects to prevent SQL injection
+- **Transaction Support**: Use `context.Database.BeginTransaction()` when calling multiple stored procedures that must execute as a unit
+- **Return Values**: Capture stored procedure return values using `SqlParameter` with `Direction = ParameterDirection.ReturnValue`
+- **Table-Valued Parameters**: Use table-valued parameters for bulk operations through stored procedures
+- **Exception Handling**: Wrap stored procedure calls in try-catch blocks and handle SQL exceptions appropriately
+
 ### SQL Server T-SQL Standards
 
 #### Casing Conventions
