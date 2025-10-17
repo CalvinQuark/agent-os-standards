@@ -51,6 +51,11 @@ All standard files follow this pattern:
 - Keep descriptions concise but clear
 - Include examples in brackets where helpful (e.g., `[e.g., React, Vue, Svelte]`)
 
+## Editing Permissions
+
+- **Markdown files**: Claude Code is authorized to edit any `.md` file in this repository without asking permission
+- **Rationale**: Standards files are frequently refined during AI-assisted development sessions; requiring permission for each edit slows iteration
+
 ## Environment
 
 - **OS**: Windows
