@@ -18,7 +18,18 @@
 #### Type Declarations
 - **Explicit types over var**: Use explicit type names instead of `var` for better code clarity and maintainability
 - **Collection expressions**: Use C# 12's collection expression syntax `[]` for initializing collections (e.g., `List<string> items = [];`)
-- **Target-typed new**: When collection expressions aren't available, use target-typed new expressions (e.g., `List<string> items = new();`)
+- **Object instantiation**: Use target-typed `new()` expressions to avoid redundant type specifications
+  ```csharp
+  // Correct - Target-typed new with parameters
+  RootCommand rootCommand = new("description");
+  StringBuilder stringBuilder = new(100);
+  HttpClient httpClient = new();
+
+  // Incorrect - Redundant type specification
+  RootCommand rootCommand = new RootCommand("description");
+  StringBuilder stringBuilder = new StringBuilder(100);
+  HttpClient httpClient = new HttpClient();
+  ```
 - **Primary constructors**: Where feasible, use primary constructor syntax to declare constructor parameters directly on the class declaration (e.g., `public class OrderProcessor(ILogger logger, IOrderRepository repository)`)
 
 #### Variable Naming
