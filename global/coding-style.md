@@ -19,6 +19,7 @@
 - **Explicit types over var**: Use explicit type names instead of `var` for better code clarity and maintainability
 - **Collection expressions**: Use C# 12's collection expression syntax `[]` for initializing collections (e.g., `List<string> items = [];`)
 - **Target-typed new**: When collection expressions aren't available, use target-typed new expressions (e.g., `List<string> items = new();`)
+- **Primary constructors**: Where feasible, use primary constructor syntax to declare constructor parameters directly on the class declaration (e.g., `public class OrderProcessor(ILogger logger, IOrderRepository repository)`)
 
 #### Variable Naming
 - **Class-level variables**: Use underscore-prefixed camelCase (e.g., `_customerName`, `_orderId`, `_connectionString`)
