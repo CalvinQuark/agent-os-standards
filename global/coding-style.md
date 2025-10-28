@@ -83,3 +83,38 @@
       { "2117", 5 }
   };
   ```
+- **Table-valued parameters**: Use table-valued parameters for passing collections to SQL Server stored procedures rather than string concatenation or multiple round trips
+  ```csharp
+  // Preferred - Table-valued parameter
+  DataTable accountsTable = new();
+  accountsTable.Columns.Add("AccountId", typeof(int));
+  foreach (int accountId in accountIds) {
+      accountsTable.Rows.Add(accountId);
+  }
+  SqlParameter parameter = new("@Accounts", SqlDbType.Structured) {
+      TypeName = "dbo.AccountIdTableType",
+      Value = accountsTable
+  };
+  ```
+
+#### String Literals and Symbol References
+- **Use nameof operator**: Use the `nameof` operator instead of hard-coded string literals when referring to parameter names, method names, property names, or other code symbols
+  ```csharp
+  // Correct - Using nameof
+  public void ProcessOrder(Order order) {
+      if (order == null) {
+          throw new ArgumentNullException(nameof(order));
+      }
+      _logger.LogInformation($"Starting {nameof(ProcessOrder)} for order {order.Id}");
+  }
+
+  // Incorrect - Hard-coded strings
+  public void ProcessOrder(Order order) {
+      if (order == null) {
+          throw new ArgumentNullException("order");
+      }
+      _logger.LogInformation($"Starting ProcessOrder for order {order.Id}");
+  }
+  ```
+- **Property change notifications**: Use `nameof` for property names in `INotifyPropertyChanged` implementations and validation scenarios
+- **Configuration keys**: Consider using `nameof` for configuration keys that correspond to class properties to maintain refactoring safety
