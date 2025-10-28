@@ -49,3 +49,37 @@
 - **Nullable always enabled**: Assume `<Nullable>enable</Nullable>` is always set in project files
 - **No unnecessary null checks**: Do not check non-nullable parameters for null; only check parameters explicitly declared as nullable (e.g., `Order?`)
 - **Null checks for nullable types**: When a parameter is nullable, perform null checks and throw `ArgumentNullException` if appropriate
+
+#### Data Structures and Type Safety
+- **Enums over dictionaries**: Prefer defining enums with extension methods over using dictionaries for fixed mappings
+  ```csharp
+  // Preferred - Enum with extension method
+  public enum BankAccount {
+      PersonalChecking,
+      SharedPersonalVisa,
+      LourdesVisa
+  }
+
+  public static class BankAccountExtensions {
+      public static string GetAccountNumber(this BankAccount account) => account switch {
+          BankAccount.PersonalChecking => "6686",
+          BankAccount.SharedPersonalVisa => "7230",
+          BankAccount.LourdesVisa => "2117",
+          _ => throw new ArgumentOutOfRangeException(nameof(account))
+      };
+
+      public static int GetAccountId(this BankAccount account) => account switch {
+          BankAccount.PersonalChecking => 3,
+          BankAccount.SharedPersonalVisa => 4,
+          BankAccount.LourdesVisa => 5,
+          _ => throw new ArgumentOutOfRangeException(nameof(account))
+      };
+  }
+
+  // Avoid - Dictionary for fixed mappings
+  private static readonly Dictionary<string, int> AccountIdMap = new() {
+      { "6686", 3 },
+      { "7230", 4 },
+      { "2117", 5 }
+  };
+  ```

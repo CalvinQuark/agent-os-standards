@@ -18,7 +18,59 @@
 - **Parameterization**: Always pass parameters to stored procedures using `SqlParameter` objects to prevent SQL injection
 - **Transaction Support**: Use `context.Database.BeginTransaction()` when calling multiple stored procedures that must execute as a unit
 - **Return Values**: Capture stored procedure return values using `SqlParameter` with `Direction = ParameterDirection.ReturnValue`
-- **Table-Valued Parameters**: Use table-valued parameters for bulk operations through stored procedures
+- **Table-Valued Parameters**: Use strongly-typed table-valued parameters for bulk operations through stored procedures; avoid manual DataTable construction
+  ```csharp
+  // Preferred - Strongly-typed TVP with records/classes
+  public record TransactionRow(
+      int AccountId,
+      DateTime Date,
+      string Trans,
+      string Name,
+      string Memo,
+      decimal Amount,
+      string Comment
+  );
+
+  public static class SqlDataRecordExtensions {
+      private static readonly SqlMetaData[] TransactionMetadata = [
+          new SqlMetaData("AccountId", SqlDbType.Int),
+          new SqlMetaData("Date", SqlDbType.DateTime),
+          new SqlMetaData("Trans", SqlDbType.NVarChar, 50),
+          new SqlMetaData("Name", SqlDbType.NVarChar, 200),
+          new SqlMetaData("Memo", SqlDbType.NVarChar, 500),
+          new SqlMetaData("Amount", SqlDbType.Decimal, 18, 2),
+          new SqlMetaData("Comment", SqlDbType.NVarChar, 1000)
+      ];
+
+      public static SqlDataRecord ToSqlDataRecord(this TransactionRow row) {
+          SqlDataRecord record = new(TransactionMetadata);
+          record.SetInt32(0, row.AccountId);
+          record.SetDateTime(1, row.Date);
+          record.SetString(2, row.Trans);
+          record.SetString(3, row.Name);
+          record.SetString(4, row.Memo);
+          record.SetDecimal(5, row.Amount);
+          record.SetString(6, row.Comment);
+          return record;
+      }
+  }
+
+  // Usage
+  IEnumerable<SqlDataRecord> tvp = transactions.Select(t => t.ToSqlDataRecord());
+  SqlParameter parameter = new("@Transactions", SqlDbType.Structured) {
+      TypeName = "dbo.TransactionTableType",
+      Value = tvp
+  };
+
+  // Avoid - Manual DataTable construction
+  DataTable tvp = new();
+  tvp.Columns.Add("AccountId", typeof(int));
+  tvp.Columns.Add("Date", typeof(DateTime));
+  // ... more columns
+  foreach (var txn in transactions) {
+      tvp.Rows.Add(txn.AccountId, txn.Date, /* ... */);
+  }
+  ```
 - **Exception Handling**: Wrap stored procedure calls in try-catch blocks and handle SQL exceptions appropriately
 
 ### SQL Server T-SQL Standards
