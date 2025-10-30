@@ -95,6 +95,7 @@
 - **Short statements**: Collapse statements shorter than 75 characters to a single line
 - **Short subqueries**: Collapse subqueries shorter than 75 characters to a single line
 - **Maximum line length**: 300 characters before wrapping
+- **Empty lines**: Do not preserve existing empty lines after batch separators (GO statements)
 
 #### JOIN Statements
 - **JOIN keyword placement**: Place JOIN keyword on new line
@@ -126,6 +127,7 @@
 - **Variable declaration**: Place equals sign on same line as variable declarations (e.g., `DECLARE @CustomerId INT = 123;`)
 - **Short control flow**: Collapse IF statements shorter than 78 characters to single line
 - **BEGIN/END blocks**: Use for multi-line IF/ELSE blocks with proper indentation
+- **ELSE placement**: Place ELSE keyword on separate line between END and BEGIN blocks
 
 #### Comments
 - **Comment alignment**: Align comments with related code elements for better readability

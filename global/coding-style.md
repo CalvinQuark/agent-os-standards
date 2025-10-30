@@ -83,18 +83,55 @@
       { "2117", 5 }
   };
   ```
-- **Table-valued parameters**: Use table-valued parameters for passing collections to SQL Server stored procedures rather than string concatenation or multiple round trips
+- **Strongly-typed data structures**: Prefer strongly-typed classes/records over manually constructed DataTables; only convert to DataTable at the SQL Server boundary when needed
   ```csharp
-  // Preferred - Table-valued parameter
-  DataTable accountsTable = new();
-  accountsTable.Columns.Add("AccountId", typeof(int));
-  foreach (int accountId in accountIds) {
-      accountsTable.Rows.Add(accountId);
+  // Correct - Strongly-typed approach
+  public record TransactionData(
+      int AccountId,
+      DateTime Date,
+      string Trans,
+      string Name,
+      string Memo,
+      decimal Amount,
+      string Comment
+  );
+
+  List<TransactionData> transactions = [
+      new(3, DateTime.Now, "TRX001", "John Doe", "Payment", 100.00m, "Monthly"),
+      new(4, DateTime.Now, "TRX002", "Jane Smith", "Purchase", 50.00m, "One-time")
+  ];
+
+  // If needed for SQL Server TVPs, use a helper method
+  DataTable ConvertToDataTable(List<TransactionData> transactions) {
+      DataTable dataTable = new();
+      dataTable.Columns.Add("AccountId", typeof(int));
+      dataTable.Columns.Add("Date", typeof(DateTime));
+      dataTable.Columns.Add("Trans", typeof(string));
+      dataTable.Columns.Add("Name", typeof(string));
+      dataTable.Columns.Add("Memo", typeof(string));
+      dataTable.Columns.Add("Amount", typeof(decimal));
+      dataTable.Columns.Add("Comment", typeof(string));
+
+      foreach (TransactionData txn in transactions) {
+          dataTable.Rows.Add(txn.AccountId, txn.Date, txn.Trans, txn.Name, txn.Memo, txn.Amount, txn.Comment);
+      }
+
+      return dataTable;
   }
-  SqlParameter parameter = new("@Accounts", SqlDbType.Structured) {
-      TypeName = "dbo.AccountIdTableType",
-      Value = accountsTable
-  };
+
+  // Incorrect - Manual DataTable construction
+  DataTable tvp = new();
+  tvp.Columns.Add("AccountId", typeof(int));
+  tvp.Columns.Add("Date", typeof(DateTime));
+  tvp.Columns.Add("Trans", typeof(string));
+  tvp.Columns.Add("Name", typeof(string));
+  tvp.Columns.Add("Memo", typeof(string));
+  tvp.Columns.Add("Amount", typeof(decimal));
+  tvp.Columns.Add("Comment", typeof(string));
+
+  foreach (var txn in transactions) {
+      tvp.Rows.Add(txn.AccountId, txn.Date, txn.Trans, txn.Name, txn.Memo, txn.Amount, txn.Comment);
+  }
   ```
 
 #### String Literals and Symbol References
