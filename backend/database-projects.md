@@ -22,6 +22,7 @@
 - **Stored Procedures**: `p_` prefix (e.g., `p_InsertAccountTransactions`)
 - **Table-Valued Functions**: `tvf_` prefix (e.g., `tvf_AccountTransaction`)
 - **Scalar Functions**: `f_` prefix (e.g., `f_IsActiveAccount`)
+- **Views**: `v` prefix (e.g., `dbo.vAccounts`)
 - **Table Types**: `*TableType` suffix (e.g., `AccountTransactionsTableType`)
 - **Primary Keys**: `PK_TableName`
 - **Foreign Keys**: `FK_TableName_ReferencedTable`
