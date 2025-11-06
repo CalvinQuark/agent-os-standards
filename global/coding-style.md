@@ -155,3 +155,19 @@
   ```
 - **Property change notifications**: Use `nameof` for property names in `INotifyPropertyChanged` implementations and validation scenarios
 - **Configuration keys**: Consider using `nameof` for configuration keys that correspond to class properties to maintain refactoring safety
+
+#### Method Modifiers (CA1822)
+- **Static methods when possible**: Mark methods as `static` when they do not access instance data (fields, properties, or other instance methods)
+- **Performance and clarity**: Static methods improve performance by avoiding unnecessary instance references and clearly signal that the method is stateless
+- **CA1822 compliance**: Address CA1822 code analysis warnings by making methods static when they don't use instance members
+  ```csharp
+  // Correct - Static method that doesn't access instance data
+  public static decimal ParseBalanceText(string balanceText) {
+      // Implementation that only uses parameters
+  }
+
+  // Incorrect - Instance method that doesn't need instance access
+  public decimal ParseBalanceText(string balanceText) {
+      // Implementation that only uses parameters but is not marked static
+  }
+  ```
