@@ -202,3 +202,27 @@
       // Implementation that only uses parameters but is not marked static
   }
   ```
+
+#### Numeric Literals
+- **Digit separators**: Use underscores (`_`) as digit separators in large numeric literals for improved readability
+  ```csharp
+  // Correct - Digit separators improve readability
+  decimal accountBalance = 5_824_371.24m;
+  long populationCount = 7_800_000_000L;
+  int maxRecords = 1_000_000;
+  double scientificValue = 299_792_458.0;
+
+  // Also correct - Group by thousands for currency and general numbers
+  decimal price = 12_345.67m;
+  int year = 2_024;
+
+  // Incorrect - Hard to read large numbers
+  decimal accountBalance = 5824371.24m;
+  long populationCount = 7800000000L;
+  int maxRecords = 1000000;
+  ```
+
+- **Separator placement**: Use separators to group digits in a way that makes sense for the number type
+  - For decimal numbers: group by thousands (every 3 digits)
+  - For binary literals: group by bytes (every 8 or 4 digits)
+  - For hexadecimal literals: group by bytes (every 2 or 4 digits)
