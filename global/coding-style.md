@@ -15,6 +15,47 @@
 - **Opening braces on same line**: Place ALL opening braces `{` on the same line as the statement that precedes them (K&R style) - applies to classes, methods, properties, control flow statements, lambda expressions, and event handlers
 - **All branches use braces**: Surround all `if` and `else` statement branches with braces, regardless of whether they are single-line statements
 
+#### XML Documentation Comments
+- **Use proper XML tags for lists**: Use `<remarks>` section with `<list type="number">` and `<item>` tags instead of plain text numbered lists in `<summary>` sections
+  ```csharp
+  // Correct - Proper XML documentation with structured list
+  /// <summary>
+  /// Verifies that the account's MostRecentTransactionDate matches the expected date.
+  /// Used to confirm successful transaction insertion.
+  /// </summary>
+  /// <remarks>
+  /// Verification Logic:
+  /// <list type="number">
+  /// <item>Calls f_GetMostRecentTransactionDateForAccount to get current MAX(Date) from database</item>
+  /// <item>Compares database MAX(Date) with expected max date from parsed CSV</item>
+  /// <item>If they match, insertion was successful and subsequent runs will start from correct date</item>
+  /// <item>If they don't match, indicates insert failure or data integrity issue</item>
+  /// </list>
+  /// </remarks>
+  /// <param name="accountId">The database Account ID</param>
+  /// <param name="expectedDate">The expected last transaction date</param>
+  /// <returns>True if dates match, false otherwise</returns>
+  public async Task<bool> VerifyAccountLastDateAsync(int accountId, DateTime expectedDate)
+
+  // Incorrect - Plain text list in summary
+  /// <summary>
+  /// Verifies that the account's MostRecentTransactionDate matches the expected date.
+  /// Used to confirm successful transaction insertion.
+  ///
+  /// Verification Logic:
+  /// 1. Calls f_GetMostRecentTransactionDateForAccount to get current MAX(Date) from database
+  /// 2. Compares database MAX(Date) with expected max date from parsed CSV
+  /// 3. If they match, insertion was successful and subsequent runs will start from correct date
+  /// 4. If they don't match, indicates insert failure or data integrity issue
+  /// </summary>
+  /// <param name="accountId">The database Account ID</param>
+  /// <param name="expectedDate">The expected last transaction date</param>
+  /// <returns>True if dates match, false otherwise</returns>
+  public async Task<bool> VerifyAccountLastDateAsync(int accountId, DateTime expectedDate)
+  ```
+- **List types**: Use `type="number"` for ordered lists, `type="bullet"` for unordered lists, and `type="table"` for definition lists
+- **Separation of concerns**: Keep `<summary>` concise; use `<remarks>` for detailed explanations, algorithms, and complex documentation
+
 #### Type Declarations
 - **Explicit types over var**: Use explicit type names instead of `var` for better code clarity and maintainability
 - **Collection expressions**: Use C# 12's collection expression syntax `[]` for initializing collections (e.g., `List<string> items = [];`)
