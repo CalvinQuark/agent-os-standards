@@ -54,6 +54,38 @@
   public async Task<bool> VerifyAccountLastDateAsync(int accountId, DateTime expectedDate)
   ```
 - **List types**: Use `type="number"` for ordered lists, `type="bullet"` for unordered lists, and `type="table"` for definition lists
+- **Nested lists**: When nesting lists within XML documentation, use `type="bullet"` for inner lists and manually label items with lowercase letters followed by a period and space (e.g., `a. `, `b. `, `c. `)
+  ```csharp
+  /// <summary>
+  /// Extracts credit card auto-payment projections from credit card accounts.
+  /// Navigates to each credit card account, extracts projection data, validates, and upserts to database.
+  /// Individual account failures do not prevent other accounts from being processed.
+  /// </summary>
+  /// <remarks>
+  /// Processing Steps:
+  /// <list type="number">
+  /// <item>
+  /// <description>Identify credit card accounts (SharedPersonalVisa, LourdesVisa)</description>
+  /// </item>
+  /// <item>
+  /// <description>
+  /// For each credit card account:
+  /// <list type="bullet">
+  /// <item><description>a. Navigate to account details page</description></item>
+  /// <item><description>b. Extract projection data (all required fields)</description></item>
+  /// <item><description>c. Validate extraction result (all-or-nothing)</description></item>
+  /// <item><description>d. If valid: Calculate ProjectionTypeId and create DTO</description></item>
+  /// <item><description>e. If invalid: Log comprehensive details (which fields succeeded/failed)</description></item>
+  /// <item><description>f. Navigate back to dashboard</description></item>
+  /// </list>
+  /// </description>
+  /// </item>
+  /// <item>
+  /// <description>Upsert all valid projections to database</description>
+  /// </item>
+  /// </list>
+  /// </remarks>
+  ```
 - **Separation of concerns**: Keep `<summary>` concise; use `<remarks>` for detailed explanations, algorithms, and complex documentation
 
 #### Type Declarations
