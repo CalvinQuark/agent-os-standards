@@ -92,6 +92,7 @@
 #### Formatting and Style
 - **Opening parentheses**: Place opening parenthesis on the same line, preceded by a space (e.g., `CREATE FUNCTION [dbo].[FunctionName] (`)
 - **Parenthesis style**: Expanded to statement with indented contents for readability
+- **TOP clause**: Always use parentheses with TOP clause (e.g., `SELECT TOP(1)` not `SELECT TOP 1`)
 - **Short statements**: Collapse statements shorter than 75 characters to a single line
 - **Short subqueries**: Collapse subqueries shorter than 75 characters to a single line
 - **Maximum line length**: 300 characters before wrapping
