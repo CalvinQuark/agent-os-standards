@@ -299,3 +299,153 @@
   - For decimal numbers: group by thousands (every 3 digits)
   - For binary literals: group by bytes (every 8 or 4 digits)
   - For hexadecimal literals: group by bytes (every 2 or 4 digits)
+
+#### Extension Members (C# 14)
+- **Extension blocks**: Use `extension` syntax to group related extension members for better organization
+  ```csharp
+  // Correct - Extension block groups related members
+  public static class EnumerableExtensions {
+      extension<TSource>(IEnumerable<TSource> source) {
+          public bool IsEmpty => !source.Any();
+          
+          public IEnumerable<TSource> WhereNotNull() {
+              return source.Where(item => item != null);
+          }
+      }
+  }
+
+  // Usage - Called as instance members
+  List<string> items = [];
+  bool empty = items.IsEmpty;
+  IEnumerable<string> filtered = items.WhereNotNull();
+
+  // Incorrect - Traditional extension method syntax (less organized for multiple related extensions)
+  public static class EnumerableExtensions {
+      public static bool IsEmpty<TSource>(this IEnumerable<TSource> source) {
+          return !source.Any();
+      }
+  }
+  ```
+
+- **Static extension members**: Add static methods, properties, and operators to types
+  ```csharp
+  // Correct - Static extension members
+  public static class EnumerableExtensions {
+      extension<TSource>(IEnumerable<TSource>) {
+          public static IEnumerable<TSource> Combine(IEnumerable<TSource> first, IEnumerable<TSource> second) {
+              return first.Concat(second);
+          }
+          
+          public static IEnumerable<TSource> Empty => Enumerable.Empty<TSource>();
+          
+          public static IEnumerable<TSource> operator + (IEnumerable<TSource> left, IEnumerable<TSource> right) {
+              return left.Concat(right);
+          }
+      }
+  }
+
+  // Usage - Called as static members
+  IEnumerable<int> combined = IEnumerable<int>.Combine(first, second);
+  IEnumerable<int> empty = IEnumerable<int>.Empty;
+  IEnumerable<int> result = first + second;
+  ```
+
+- **When to use**: Use extension members for grouping related extensions, adding properties to types you don't control, adding static members, and implementing user-defined operators as extensions
+- **When to avoid**: Use traditional extension methods for simple standalone extensions, maintaining consistency with existing codebases, or ensuring backward compatibility
+
+#### The `field` Keyword (C# 14)
+- **Reduce property boilerplate**: Use `field` keyword in property accessors to eliminate explicit backing field declarations
+  ```csharp
+  // Correct - Using field keyword with validation
+  public class Customer {
+      public string Name {
+          get;
+          set => field = value ?? throw new ArgumentNullException(nameof(value));
+      }
+      
+      public int Age {
+          get;
+          set => field = value >= 0 ? value : throw new ArgumentException("Age cannot be negative");
+      }
+      
+      public decimal Balance {
+          get => field;
+          set {
+              if (value < 0) {
+                  throw new ArgumentException("Balance cannot be negative");
+              }
+              field = value;
+          }
+      }
+  }
+
+  // Incorrect - Unnecessary explicit backing field
+  public class Customer {
+      private string _name;
+      public string Name {
+          get => _name;
+          set => _name = value ?? throw new ArgumentNullException(nameof(value));
+      }
+  }
+  ```
+
+- **Partial accessor implementation**: Customize one or both accessors as needed
+  ```csharp
+  // Correct - Custom setter only
+  public string Description {
+      get;
+      set => field = value?.Trim() ?? string.Empty;
+  }
+
+  // Correct - Custom getter only
+  public DateTime LastModified {
+      get => field == default ? DateTime.UtcNow : field;
+      set;
+  }
+  ```
+
+- **When to use**: Use `field` for properties with validation/transformation logic that don't require backing field access elsewhere in the class
+- **When to avoid**: Use explicit backing fields when multiple methods need direct field access, for non-default initialization, for complex initialization logic, or when backing field type differs from property type
+- **Disambiguation**: Use `@field` or `this.field` if your type contains a symbol named `field`
+
+#### Null-Conditional Assignment (C# 14)
+- **Conditional assignment**: Use `?.` and `?[]` on the left side of assignments to assign only when the target is not null
+  ```csharp
+  // Correct - Null-conditional assignment
+  customer?.Order = GetCurrentOrder();
+  account?.Balance = CalculateNewBalance();
+  orderList?[0] = newOrder;
+  dictionary?["key"] = value;
+
+  // Incorrect - Verbose null check (when null-conditional is clearer)
+  if (customer is not null) {
+      customer.Order = GetCurrentOrder();
+  }
+  ```
+
+- **Compound assignment**: Use with compound operators (`+=`, `-=`, `*=`, `/=`, etc.)
+  ```csharp
+  // Correct - Null-conditional compound assignment
+  account?.Balance += depositAmount;
+  order?.TotalCost -= discountAmount;
+  statistics?.RequestCount++;
+  collection?[index] *= scaleFactor;
+  ```
+
+- **Short-circuit evaluation**: Right side only evaluates if left side is not null
+  ```csharp
+  // Correct - ExpensiveOperation() only called if customer is not null
+  customer?.Order = ExpensiveOperation();
+  ```
+
+- **Restrictions**: Increment (`++`) and decrement (`--`) operators NOT supported with null-conditional access
+  ```csharp
+  // Incorrect - Not allowed
+  // statistics?.RequestCount++;
+
+  // Correct - Use compound assignment
+  statistics?.RequestCount += 1;
+  ```
+
+- **When to use**: Use for conditional member assignment when the target might be null, to skip side effects when target is null, and for optional nested property updates
+- **When to avoid**: Use traditional null checks when performing multiple operations, handling null case differently, code is clearer with explicit checks, or using increment/decrement operators
